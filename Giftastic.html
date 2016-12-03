@@ -11,18 +11,38 @@
 			
 			<form id="gif-form">
 				<p></p>
-				<label for="gif-input">Add an animal</label>
+				<label for="gif-input">Add a Gif Type</label>
 				<input type="text" id="gif-input">
 				<!-- Button triggers new gif category to be added -->
 				<input id="add-gif" type="submit" value="Send">
 			</form>
-			<div id="gif-area"></div>
-			<b id="rating-area"></b>
+			
+			<!-- gifs land here NEED TO IMPROVE RATING DISPLAY -->
+			<!-- <div id="gif-area" style="display:flex;justify-content:center;align-items:flex-end;"></div> -->
+				<div id="gif-area" style="justify-content:center;align-items;align-items:flex-end;"></div>
+			
+  
+			
+
 			
 			<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 			<script type="text/javascript">
 				
-			
+				//get user input for a new category of animal
+					$("#add-gif").on("click", function(event) {
+						//allow enter or click
+						event.preventDefault();
+						// This line will grab the text from the input box
+						var gif = $("#gif-input").val().trim();
+						
+						// The gif from the textbox is then added to our array
+						gifArray.push(gif);
+						console.log(gifArray);
+						// calling renderButtons which handles the processing of our gif array
+						$("#gif-input").val('');
+						renderButtons();
+					}); // get user input
+				
 				
 				var gifArray = ["frog", "duck","cow"];
 				renderButtons();
@@ -32,6 +52,7 @@
 					$("#gif-buttons-view").empty();
 					// Looping through the array of gifs
 					for (var i = 0; i < gifArray.length; i++) {
+						console.log(gifArray)
 						// Then dynamicaly generating buttons for each gif in the array.
 						// This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
 						var a = $("<button>");
@@ -45,20 +66,7 @@
 						$("#gif-buttons-view").append(a);
 					} //for gitArray
 
-					//get user input for a new category of animal
-					$("#add-gif").on("click", function(event) {
-						//allow enter or click
-						event.preventDefault();
-						// This line will grab the text from the input box
-						var gif = $("#gif-input").val().trim();
-						// The gif from the textbox is then added to our array
-						gifArray.push(gif);
-						console.log(gifArray);
-						// calling renderButtons which handles the processing of our gif array
-						$("#gif-input").val('');
-						renderButtons();
-					}); // get user input
-				
+
 
 
 
@@ -93,6 +101,8 @@
 								// create an img tag
 								var animalImage = $("<img>");
 								// Setting the animalImage src attribute to imageUrlStill
+								var ratingArea = $("<ul>");
+								ratingArea.text(imageRating);
 								animalImage.attr("src", imageUrlStill);
 								animalImage.attr("data-still", imageUrlStill);
 								animalImage.attr("data-animate", imageUrlAnimated);
@@ -100,10 +110,11 @@
 								animalImage.attr("class", "gifImage");
 								animalImage.attr("alt", "animal");
 								console.log(animalImage);
-								// Prepending the catImage to the images div
-							
+								// Prepending the Caption Image to the images div
+								
 								$("#gif-area").prepend(animalImage);
-								$("#gif-area").prepend("Rating: " + imageRating);
+								$("#gif-area").prepend("Rating: " + ratingArea.text());
+							//	$("#gif-area").prepend("Rating: " + imageRating);
 							} //for 10 images
 							
 							//event listener for animate class = gifImage
