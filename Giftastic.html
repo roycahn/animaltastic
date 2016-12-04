@@ -18,9 +18,9 @@
 			</form>
 			
 			<!-- gifs land here NEED TO IMPROVE RATING DISPLAY -->
-			<!-- <div id="gif-area" style="display:flex;justify-content:center;align-items:flex-end;"></div> -->
-				<div id="gif-area" style="justify-content:center;align-items;align-items:flex-end;"></div>
 			
+				<div id="gif-area" ></div>
+				<br>
   
 			
 
@@ -97,23 +97,32 @@
 								var imageUrlAnimated = response.data[i].images.fixed_height.url;
 								var imageRating = response.data[i].rating.toUpperCase();
 								
-								
+								var imageDiv = $("<div>");
+								imageDiv.attr("class","imgdiv");
 								// create an img tag
 								var animalImage = $("<img>");
 								// Setting the animalImage src attribute to imageUrlStill
-								var ratingArea = $("<ul>");
-								ratingArea.text(imageRating);
+								
+								//ratingArea.text(imageRating);
 								animalImage.attr("src", imageUrlStill);
 								animalImage.attr("data-still", imageUrlStill);
 								animalImage.attr("data-animate", imageUrlAnimated);
 								animalImage.attr("data-state", "still");
 								animalImage.attr("class", "gifImage");
 								animalImage.attr("alt", "animal");
-								console.log(animalImage);
-								// Prepending the Caption Image to the images div
 								
-								$("#gif-area").prepend(animalImage);
-								$("#gif-area").prepend("Rating: " + ratingArea.text());
+								var figcaption = $("<figcaption>"); // Rating: " + imageRating + "</figcaption>";
+								figcaption.attr("class", "figcap");
+								figcaption.html("Rating: " + imageRating );
+
+//KEY PART !!!!
+								imageDiv.append(animalImage);
+								imageDiv.append(figcaption);
+
+								// Prepending the Caption Image to the images div
+								$("#gif-area").prepend(imageDiv);
+								//$("#gif-area").prepend(animalImage + "<figcaption> " + imageRating + " </figcaption>");
+							//	$("#gif-area").prepend("Rating: " + ratingArea.text());
 							//	$("#gif-area").prepend("Rating: " + imageRating);
 							} //for 10 images
 							

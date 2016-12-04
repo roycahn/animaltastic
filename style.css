@@ -1,6 +1,7 @@
 button {
    margin: 10px;
    font-weight: 900;
+   float: center;
 
 }
 
@@ -30,4 +31,14 @@ input {
 img {
    margin: 10px;
    border-radius: 50%;
+}
+
+.imgdiv {
+	display: block;
+	float: left;
+}
+
+.figcap{
+	text-align: center;
+
 }
